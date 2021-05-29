@@ -1,11 +1,10 @@
 import express from "express";
 import votifier from "votifier-send";
-import cors from "cors";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
 app.post("/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const { settings } = req.body as any;
   settings.data.timestamp = new Date().getTime();
   try {
