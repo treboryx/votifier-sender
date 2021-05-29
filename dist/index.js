@@ -5,10 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const votifier_send_1 = __importDefault(require("votifier-send"));
+const cors_1 = __importDefault(require("cors"));
 const app = express_1.default();
 app.use(express_1.default.json());
+app.use(cors_1.default());
 app.post("/", (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*");
     const { settings } = req.body;
     settings.data.timestamp = new Date().getTime();
     try {
