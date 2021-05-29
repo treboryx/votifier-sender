@@ -10,6 +10,12 @@ const app = express_1.default();
 app.use(express_1.default.json());
 app.use(cors_1.default());
 app.post("/", (req, res) => {
+    res.set({
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+    });
     res.header("Access-Control-Allow-Origin", "*");
     const { settings } = req.body;
     settings.data.timestamp = new Date().getTime();
@@ -22,7 +28,7 @@ app.post("/", (req, res) => {
                 });
             }
             return res
-                .status(500)
+                .status(200)
                 .json({ success: true, message: "Votifier signal forwarded" });
         });
     }
